@@ -1,0 +1,10 @@
+﻿<y:DialogWindow x:Class="AvoBright.BootstrapLayouter.PreviewWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:y="clr-namespace:Microsoft.VisualStudio.PlatformUI;assembly=Microsoft.VisualStudio.Shell.10.0"
+        Title="Preview" Height="400" Width="1050" Loaded="DialogWindow_Loaded" ShowInTaskbar="False" Closing="DialogWindow_Closing">
+    <Grid>
+        <WebBrowser Name="webBrowser" Margin="0,31,0,0" SizeChanged="webBrowser_SizeChanged" />
+        <Label Height="31" Name="widthLabel" VerticalAlignment="Top" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" FontSize="14" FontWeight="Bold" Background="LightGray" />
+    </Grid>
+</y:DialogWindow>
