@@ -471,5 +471,11 @@ namespace AvoBright.BootstrapLayouter
             string source = HtmlGenerator.GenerateHtml(page);
             Clipboard.SetText(source, TextDataFormat.UnicodeText);
         }
+
+        protected override void OnClosing(System.ComponentModel.CancelEventArgs e)
+        {
+            this.Visibility = Visibility.Hidden;
+            e.Cancel = true;
+        }
     }
 }

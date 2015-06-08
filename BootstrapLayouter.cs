@@ -32,6 +32,8 @@ namespace AvoBright.BootstrapLayouter
     [Guid(GuidList.guidBootstrapLayouterPkgString)]
     public sealed class BootstrapLayouter : Package
     {
+        private static LayoutWindow LayoutWindow { get; set; }
+
         /// <summary>
         /// Default constructor of the package.
         /// Inside this method you can place any initialization code that does not require 
@@ -76,8 +78,12 @@ namespace AvoBright.BootstrapLayouter
         /// </summary>
         private void MenuItemCallback(object sender, EventArgs e)
         {
-            var layoutWindow = new LayoutWindow();
-            layoutWindow.ShowModal();
+            if (LayoutWindow == null)
+            {
+                LayoutWindow = new LayoutWindow();    
+            }
+
+            LayoutWindow.ShowModal();
         }
 
     }
