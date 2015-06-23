@@ -398,72 +398,12 @@ namespace AvoBright.BootstrapLayouter
 
         private void previewButton_Click(object sender, RoutedEventArgs e)
         {
-            try
-            {
-                SetIeEngine();
-            }
-            catch (Exception ex)
-            {
-                MessageBox.Show(this, ex.Message, "Preview", MessageBoxButton.OK, MessageBoxImage.Error);
-                return;
-            }
-
-            var helper = new WindowInteropHelper(this);
-            IntPtr ptr = helper.Handle;
-            string ptrStr = ptr.ToString();
-
             string previewSource = HtmlGenerator.GeneratePreviewHtml(page);
 
-            string tempFilePath = System.IO.Path.GetTempFileName();
-
-            using (var writer = new StreamWriter(new FileStream(tempFilePath, FileMode.Open, FileAccess.Write, FileShare.ReadWrite)))
-            {
-                writer.Write(previewSource);
-            }
-
-            //string arguments = tempFilePath + " " + ptrStr;
-
-            string previewerDirPath = System.IO.Path.GetDirectoryName(GetType().Assembly.Location);
-            string previewerFilePath = System.IO.Path.Combine(previewerDirPath, "BootstrapLayoutPreviewer.exe");
-
             var previewWindow = new PreviewWindow();
-            previewWindow.SourceFilePath = tempFilePath;
+            previewWindow.HtmlSource = previewSource;
             previewWindow.Owner = this;
             previewWindow.ShowModal();
-
-            //Process.Start(previewerFilePath, arguments);
-        }
-
-        private void SetIeEngine()
-        {
-            int value = GetIeRegistryValue();
-            if (value == 0)
-            {
-                throw new Exception("Unsupported IE version is installed in this computer. Only IE 9-11 are supported to preview layout.");
-            }
-
-            string keyName = @"HKEY_CURRENT_USER\Software\Microsoft\Internet Explorer\Main\FeatureControl\FEATURE_BROWSER_EMULATION";
-            string valueName = "BootstrapLayoutPreviewer.exe";
-
-            Microsoft.Win32.Registry.SetValue(keyName, valueName, value, Microsoft.Win32.RegistryValueKind.DWord);
-        }
-
-        private int GetIeRegistryValue()
-        {
-            var browser = new System.Windows.Forms.WebBrowser();
-            var version = browser.Version;
-
-            switch (version.Major)
-            {
-                case 11:
-                    return 11000;
-                case 10:
-                    return 10000;
-                case 9:
-                    return 9000;
-                default:
-                    return 0;
-            }
         }
 
         private void copyHtmlButton_Click(object sender, RoutedEventArgs e)

@@ -20,7 +20,7 @@ namespace AvoBright.BootstrapLayouter
 {
     public partial class PreviewWindow : DialogWindow
     {
-        public string SourceFilePath { get; set; }
+        public string HtmlSource { get; set; }
 
         public PreviewWindow()
         {
@@ -29,19 +29,12 @@ namespace AvoBright.BootstrapLayouter
 
         public void Preview()
         {
-            if (string.IsNullOrEmpty(SourceFilePath) || !File.Exists(SourceFilePath))
+            if (string.IsNullOrEmpty(HtmlSource))
             {
                 return;
             }
 
-            string source = "";
-
-            using (var reader = new StreamReader(new FileStream(SourceFilePath, FileMode.Open, FileAccess.Read, FileShare.ReadWrite)))
-            {
-                source = reader.ReadToEnd();
-            }
-
-            webBrowser.NavigateToString(source);
+            webBrowser.NavigateToString(HtmlSource);
         }
 
 
@@ -91,15 +84,6 @@ namespace AvoBright.BootstrapLayouter
             widthLabel.Content = "Width: " + PointsToPixels(width, LengthDirection.Horizontal) + "px";
         }
 
-        private void DialogWindow_Closing(object sender, System.ComponentModel.CancelEventArgs e)
-        {
-            // closed and unloaded event don't seem to fire, but closing does
-
-            if (!string.IsNullOrEmpty(SourceFilePath) && File.Exists(SourceFilePath))
-            {
-                File.Delete(SourceFilePath);
-            }
-        }
 
     }
 }
