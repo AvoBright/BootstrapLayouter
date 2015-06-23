@@ -3,7 +3,7 @@
   <Identifier Id="e8060ce4-9c06-42dd-8e18-9ce62256f344">
     <Name>Bootstrap Layouter</Name>
     <Author>AvoBright</Author>
-    <Version>1.0</Version>
+    <Version>1.1</Version>
     <Description xml:space="preserve">A Visual Studio extension that can build and preview Bootstrap grid layouts.</Description>
     <Locale>1033</Locale>
     <MoreInfoUrl>https://github.com/AvoBright/BootstrapLayouter</MoreInfoUrl>
@@ -21,8 +21,11 @@
       <VisualStudio Version="12.0">
         <Edition>Pro</Edition>
       </VisualStudio>
+      <VisualStudio Version="14.0">
+        <Edition>Pro</Edition>
+      </VisualStudio>
     </SupportedProducts>
-    <SupportedFrameworkRuntimeEdition MinVersion="4.0" MaxVersion="4.0" />
+    <SupportedFrameworkRuntimeEdition MinVersion="4.0" />
   </Identifier>
   <References>
     <Reference Id="Microsoft.VisualStudio.MPF" MinVersion="10.0">

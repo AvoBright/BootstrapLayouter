@@ -20,15 +20,9 @@
   <!--This header contains the command ids for the menus provided by the shell. -->
   <Extern href="vsshlids.h"/>
 
-  <!--Definition of some VSCT specific constants. In this sample we use it for the IDs inside the guidOfficeIcon group. -->
-  <Extern href="msobtnid.h"/>
-
-
-
-
   <!--The Commands section is where we the commands, menus and menu groups are defined.
       This section uses a Guid to identify the package that provides the command defined inside it. -->
-  <Commands package="guidBootstrapLayouterPkg">
+  <Commands package="guidBootstrapLayouter">
     <!-- Inside this section we have different sub-sections: one for the menus, another  
     for the menu groups, one for the buttons (the actual commands), one for the combos 
     and the last one for the bitmaps used. Each element is identified by a command id that  
@@ -36,20 +30,15 @@
     called "command set" and is used to group different command inside a logically related  
     group; your package should define its own command set in order to avoid collisions  
     with command ids defined by other packages. -->
-
     
     <!-- In this section you can define new menu groups. A menu group is a container for 
          other menus or buttons (commands); from a visual point of view you can see the 
          group as the part of a menu contained between two lines. The parent of a group 
          must be a menu. -->
     <Groups>
-
       <Group guid="guidBootstrapLayouterCmdSet" id="MyMenuGroup" priority="0x0600">
         <Parent guid="guidSHLMainMenu" id="IDM_VS_MENU_TOOLS"/>
       </Group>
-      
-
-
     </Groups>
     
     <!--Buttons section. -->
@@ -62,21 +51,16 @@
           You can add more than one CommandFlag node e.g.:
               <CommandFlag>DefaultInvisible</CommandFlag>
               <CommandFlag>DynamicVisibility</CommandFlag>
-          If you do not want an image next to your command, remove the Icon node or set it to <Icon guid="guidOfficeIcon" id="msotcidNoIcon" /> -->
-
-      <Button guid="guidBootstrapLayouterCmdSet" id="cmdidBootstrapLayout" priority="0x0100" type="Button">
+          If you do not want an image next to your command, remove the Icon node /> -->
+      <Button guid="guidBootstrapLayouterCmdSet" id="BootstrapLayouterCommandId" priority="0x0100" type="Button">
         <Parent guid="guidBootstrapLayouterCmdSet" id="MyMenuGroup" />
         <Icon guid="guidImages" id="bmpPic1" />
         <Strings>
-          <CommandName>cmdidBootstrapLayout</CommandName>
-          <ButtonText>Bootstrap Layout</ButtonText>
+          <ButtonText>Bootstrap Layouter</ButtonText>
         </Strings>
       </Button>
-
-
-
     </Buttons>
-   
+    
     <!--The bitmaps section is used to define the bitmaps that are used for the commands.-->
     <Bitmaps>
       <!--  The bitmap id is defined in a way that is a little bit different from the others: 
@@ -86,30 +70,20 @@
             must be the actual index (1-based) of the bitmap inside the bitmap strip. -->
       <Bitmap guid="guidImages" href="icon16x16.png" usedList="bmpPic1"/>
     </Bitmaps>
- 
   </Commands>
-
-
-
-
-
+  
   <Symbols>
     <!-- This is the package guid. -->
-    <GuidSymbol name="guidBootstrapLayouterPkg" value="{e8060ce4-9c06-42dd-8e18-9ce62256f344}" />
+    <GuidSymbol name="guidBootstrapLayouter" value="{e8060ce4-9c06-42dd-8e18-9ce62256f344}" />
     
     <!-- This is the guid used to group the menu commands together -->
     <GuidSymbol name="guidBootstrapLayouterCmdSet" value="{96bb7fcf-6167-4836-99c8-cae1976de3fb}">
-
       <IDSymbol name="MyMenuGroup" value="0x1020" />
-      <IDSymbol name="cmdidBootstrapLayout" value="0x0100" />
+      <IDSymbol name="BootstrapLayouterCommandId" value="0x0100" />
     </GuidSymbol>
-    
-    
     
     <GuidSymbol name="guidImages" value="{e5776f12-c0f0-414e-a8a7-5231f4c22ea8}" >
       <IDSymbol name="bmpPic1" value="1" />
     </GuidSymbol>
-    
   </Symbols>
-
 </CommandTable>
