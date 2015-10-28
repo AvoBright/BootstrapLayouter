@@ -9,5 +9,8 @@ namespace AvoBright.BootstrapLayouter
     public interface IRowContainer
     {
         ObservableCollection<Row> Rows { get; }
+        
+        bool IsSelected { get; set; }
+        bool IsExpanded { get; set; }
     }
 }

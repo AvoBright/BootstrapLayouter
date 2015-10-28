@@ -51,7 +51,10 @@ namespace AvoBright.BootstrapLayouter
 
         private void addContainerButton_Click(object sender, RoutedEventArgs e)
         {
-            page.Containers.Add(new Container());
+            var container = new Container();
+            container.IsSelected = true;
+
+            page.Containers.Add(container);
         }
 
         private void addRowButton_Click(object sender, RoutedEventArgs e)
@@ -59,7 +62,24 @@ namespace AvoBright.BootstrapLayouter
             if (treeView.SelectedItem != null && treeView.SelectedItem is IRowContainer)
             {
                 var container = treeView.SelectedItem as IRowContainer;
-                container.Rows.Add(new Row(container));
+                container.IsExpanded = true;
+
+                var newRow = new Row(container);
+
+                container.Rows.Add(newRow);
+            }
+        }
+
+        private void addColumnButton_Click(object sender, RoutedEventArgs e)
+        {
+            if (treeView.SelectedItem != null && treeView.SelectedItem is Row)
+            {
+                var row = treeView.SelectedItem as Row;
+                row.IsExpanded = true;
+
+                var newColumn = new Column(row);
+
+                row.Columns.Add(newColumn);
             }
         }
 
@@ -200,15 +220,6 @@ namespace AvoBright.BootstrapLayouter
         private ColumnBreakpoint ComboBoxIndexToBreakpoint()
         {
             return (ColumnBreakpoint)(breakpointComboBox.SelectedIndex + 1);
-        }
-
-        private void addColumnButton_Click(object sender, RoutedEventArgs e)
-        {
-            if (treeView.SelectedItem != null && treeView.SelectedItem is Row)
-            {
-                var row = treeView.SelectedItem as Row;
-                row.Columns.Add(new Column(row));
-            }
         }
 
         private void deleteButton_Click(object sender, RoutedEventArgs e)
