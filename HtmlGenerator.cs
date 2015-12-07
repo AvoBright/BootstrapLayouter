@@ -104,9 +104,12 @@ namespace AvoBright.BootstrapLayouter
                     from n in column.Sizes
                     select n.ClassName));
 
-            classes += " " + string.Join(" ", (
+            if (column.Offsets.Count > 0)
+            {
+                classes += " " + string.Join(" ", (
                 from n in column.Offsets
                 select n.ClassName));
+            }
 
             builder.Append('\t', indentLevel);
             builder.AppendLine("<div class=\"" + classes + "\">");
